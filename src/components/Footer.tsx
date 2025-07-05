@@ -13,11 +13,11 @@ import {
   FaPhoneAlt,
   FaEnvelope,
 } from "react-icons/fa";
-import styles from "./Footer.module.css";
+import styles from "./styles/Footer.module.css";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer id="footer" className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.column}>

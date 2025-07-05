@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./ASBOSparesCategories.module.css";
+import styles from "./styles/ASBOSparesCategories.module.css";
 
 const inlet_outlet_image = "/assets/inlet_outlet.jpg";
 const shock_absorbers_image = "/assets/shock_absorbers.jpg";
@@ -9,7 +9,7 @@ const stabilizers_image = "/assets/stands.jpg";
 
 export default function ASBOSparesCategories() {
   return (
-    <section className={styles.section}>
+    <section id="spares" className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>Browse ASBO Spares Categories</h2>

@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./ASBOLiquidPreview.module.css";
+import styles from "./styles/ASBOLiquidPreview.module.css";
 
 const liquidImagePath = "/assets/liquid_image.jpg";
 
 export default function ASBOLiquidPreview() {
   return (
-    <section className={styles.section}>
+    <section id="liquid" className={styles.section}>
       <div className={styles.container}>
         <div className={styles.contentWrapper}>
           <div className={styles.imageContent}>

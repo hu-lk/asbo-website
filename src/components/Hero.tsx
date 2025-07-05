@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./Hero.module.css";
+import styles from "./styles/Hero.module.css";
 
 const hero_page_image_path = "/assets/hero_page_image.jpg";
 

@@ -96,3 +96,36 @@
 .cartIcon:hover {
   color: #4ac6b7;
 }
+
+/* New Dropdown Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 10rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
+
+.dropdownItem {
+  color: #4b5563;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  display: block;
+  font-size: 0.875rem;
+  transition: color 0.3s;
+}
+
+.dropdownItem:hover {
+  color: #4ac6b7;
+}

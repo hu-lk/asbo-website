@@ -1,7 +1,7 @@
 "use client";
 
 import { FaMedal, FaCheckCircle, FaHeadset } from "react-icons/fa";
-import styles from "./WhyChooseASBO.module.css";
+import styles from "./styles/WhyChooseASBO.module.css";
 
 export default function WhyChooseASBO() {
   return (
