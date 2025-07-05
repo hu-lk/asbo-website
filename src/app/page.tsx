@@ -1,11 +1,21 @@
+"use client";
+
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import ASBOLiquidPreview from "@/components/ASBOLiquidPreview";
+import ASBOSparesCategories from "@/components/ASBOSparesCategories";
+import WhyChooseASBO from "@/components/WhyChooseASBO";
+import Footer from "@/components/Footer";
+
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-4xl font-bold mb-4">Welcome to ASBO</h1>
-      <p className="text-lg">
-        We provide all types of washing machine spare parts. Our liquid product
-        line is coming soon!
-      </p>
-    </div>
+    <>
+      <Navbar />
+      <Hero />
+      <ASBOLiquidPreview />
+      <ASBOSparesCategories />
+      <WhyChooseASBO />
+      <Footer />
+    </>
   );
 }
