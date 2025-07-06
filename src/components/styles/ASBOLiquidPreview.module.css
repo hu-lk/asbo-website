@@ -1,0 +1,153 @@
+.section {
+  background: linear-gradient(to right, #e6f7f5, #f5f5f5);
+  padding: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 4rem;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.imageContent {
+  width: 100%;
+  max-width: 50%;
+  margin-bottom: 2.5rem;
+}
+
+.image {
+  margin: 0 auto;
+  max-width: 18.75rem;
+}
+
+.textContent {
+  width: 100%;
+  max-width: 50%;
+  padding-left: 0;
+  padding-left: 0.5rem;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+}
+
+.comingSoonBadge {
+  display: inline-block;
+  background-color: #4ac6b7;
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1b365d;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #4b5563;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.features {
+  margin-bottom: 2rem;
+}
+
+.featuresTitle {
+  color: #1b365d;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+}
+
+.featureDot {
+  width: 0.125rem;
+  height: 0.125rem;
+  background-color: #4ac6b7;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.emailSection {
+  margin-top: 1rem;
+}
+
+.emailText {
+  color: #4b5563;
+  margin-bottom: 0.75rem;
+}
+
+.emailInputWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.emailInput {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px 0 0 9999px;
+  outline: none;
+  font-size: 0.875rem;
+}
+
+.emailInput:focus {
+  outline: 0.125rem solid #4ac6b7;
+  border-color: transparent;
+}
+
+.notifyButton {
+  background-color: #1b365d;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0 9999px 9999px 0;
+  transition: background-color 0.3s;
+  font-size: 0.875rem;
+}
+
+.notifyButton:hover {
+  background-color: #4ac6b7;
+}
+
+@media (min-width: 48rem) {
+  .contentWrapper {
+    flex-direction: row;
+  }
+
+  .imageContent {
+    margin-bottom: 0;
+  }
+
+  .textContent {
+    padding-left: 0.5rem;
+  }
+}
