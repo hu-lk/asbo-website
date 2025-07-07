@@ -90,7 +90,9 @@
 .contactIcon {
   color: #4ac6b7;
   margin-right: 0.75rem;
-  margin-top: 0.0625rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+  font-size: 1.25rem;
 }
 
 .contactText {

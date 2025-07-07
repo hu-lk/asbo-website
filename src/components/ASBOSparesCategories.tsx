@@ -37,7 +37,7 @@ export default function ASBOSparesCategories() {
                 High-quality shock absorbers to reduce vibration and noise
                 during spin cycles.
               </p>
-              <a href="#" className={styles.exploreLink}>
+              <a href="/spares" className={styles.exploreLink}>
                 Explore Products
                 <span className={styles.arrow}>→</span>
               </a>
@@ -60,7 +60,7 @@ export default function ASBOSparesCategories() {
                 Durable pipes and hoses for reliable water flow and drainage
                 systems.
               </p>
-              <a href="#" className={styles.exploreLink}>
+              <a href="/spares" className={styles.exploreLink}>
                 Explore Products
                 <span className={styles.arrow}>→</span>
               </a>
@@ -83,7 +83,7 @@ export default function ASBOSparesCategories() {
                 Precision-engineered stands to keep your washing machine
                 balanced and secure.
               </p>
-              <a href="#" className={styles.exploreLink}>
+              <a href="/spares" className={styles.exploreLink}>
                 Explore Products
                 <span className={styles.arrow}>→</span>
               </a>

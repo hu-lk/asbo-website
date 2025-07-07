@@ -104,6 +104,65 @@
   height: 1.25rem;
   object-fit: contain;
 }
+/* Add below the existing styles */
+
+.searchBox {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 90%;
+  width: 400px;
+  text-align: left;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.modal h3 {
+  margin-bottom: 1rem;
+  color: #1b365d;
+}
+
+.modal p {
+  margin: 0.5rem 0;
+  color: #4b5563;
+}
+
+.modal button {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  background: #4ac6b7;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background: #1b365d;
+}
 
 @media (min-width: 48rem) {
   .grid {
