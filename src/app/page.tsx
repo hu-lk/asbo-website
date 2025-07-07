@@ -5,6 +5,7 @@ import ASBOLiquidPreview from "@/components/ASBOLiquidPreview";
 import ASBOSparesCategories from "@/components/ASBOSparesCategories";
 import WhyChooseASBO from "@/components/WhyChooseASBO";
 import Footer from "@/components/Footer";
+import ServiceSection from "@/components/ServiceSection";
 
 // Metadata export for server-side rendering
 export const metadata: Metadata = {
@@ -20,6 +21,9 @@ export default function Home() {
     <>
       <div id="home">
         <Navbar />
+      </div>
+      <div id="services">
+        <ServiceSection />
       </div>
       <div id="hero">
         <Hero />

@@ -27,16 +27,16 @@ export default function Footer() {
               performance.
             </p>
             <div className={styles.socialLinks}>
-              <a href="#" className={styles.socialLink}>
+              <a href="/spares" className={styles.socialLink}>
                 <FaFacebookF className={styles.socialIcon} />
               </a>
-              <a href="#" className={styles.socialLink}>
+              <a href="/spares" className={styles.socialLink}>
                 <FaTwitter className={styles.socialIcon} />
               </a>
-              <a href="#" className={styles.socialLink}>
+              <a href="/spares" className={styles.socialLink}>
                 <FaInstagram className={styles.socialIcon} />
               </a>
-              <a href="#" className={styles.socialLink}>
+              <a href="/spares" className={styles.socialLink}>
                 <FaLinkedinIn className={styles.socialIcon} />
               </a>
             </div>
@@ -46,22 +46,22 @@ export default function Footer() {
             <h4 className={styles.sectionTitle}>Quick Links</h4>
             <ul className={styles.linkList}>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="/spares" className={styles.link}>
                   ASBO Spares
                 </a>
               </li>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="#liquid" className={styles.link}>
                   ASBO Liquid
                 </a>
               </li>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="/aboutUs" className={styles.link}>
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="#footer" className={styles.link}>
                   Contact
                 </a>
               </li>
@@ -77,27 +77,27 @@ export default function Footer() {
             <h4 className={styles.sectionTitle}>Categories</h4>
             <ul className={styles.linkList}>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="/spares" className={styles.link}>
                   Shock Absorbers
                 </a>
               </li>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="/spares" className={styles.link}>
                   Inlet/Outlet Pipes
                 </a>
               </li>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="/spares" className={styles.link}>
                   Stabilizers
                 </a>
               </li>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="/spares" className={styles.link}>
                   Motors & Pumps
                 </a>
               </li>
               <li>
-                <a href="#" className={styles.link}>
+                <a href="/spares" className={styles.link}>
                   Control Panels
                 </a>
               </li>
@@ -110,12 +110,13 @@ export default function Footer() {
               <li className={styles.contactItem}>
                 <FaMapMarkerAlt className={styles.contactIcon} />
                 <span className={styles.contactText}>
-                  123 Business Street, City, Country
+                  X road, adjacent lane Indra -Nagendra theatre, Saroornagar,
+                  Sai Nagar, Saroor Nagar East, Kharmanghat Hyderabad, Telangana
                 </span>
               </li>
               <li className={styles.contactItem}>
                 <FaPhoneAlt className={styles.contactIcon} />
-                <span className={styles.contactText}>+1 234 567 890</span>
+                <span className={styles.contactText}>+91 9676626307</span>
               </li>
               <li className={styles.contactItem}>
                 <FaEnvelope className={styles.contactIcon} />

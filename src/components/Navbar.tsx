@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles/Navbar.module.css";
-import { Search, ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -68,7 +68,7 @@ export default function Navbar() {
                 </a>
               </>
             )}
-            <a href="/about" className={styles.navLink}>
+            <a href="/aboutUs" className={styles.navLink}>
               About
             </a>
             <a href="#footer" className={styles.navLink}>
@@ -78,7 +78,7 @@ export default function Navbar() {
 
           {/* Desktop Right Section */}
           <div className={styles.rightSection}>
-            <div className={styles.searchContainer}>
+            {/* <div className={styles.searchContainer}>
               <input
                 type="text"
                 placeholder="Search products..."
@@ -86,7 +86,7 @@ export default function Navbar() {
                 id="searchInput"
               />
               <Search className={styles.searchIcon} size={20} />
-            </div>
+            </div> */}
             <a href="#cart" className={styles.cartIcon}>
               <ShoppingCart size={24} />
             </a>
@@ -149,7 +149,7 @@ export default function Navbar() {
                 </a>
               </nav>
               <div className={styles.rightSectionMobile}>
-                <div className={styles.searchContainer}>
+                {/* <div className={styles.searchContainer}>
                   <input
                     type="text"
                     placeholder="Search products..."
@@ -157,7 +157,7 @@ export default function Navbar() {
                     id="searchInput"
                   />
                   <Search className={styles.searchIcon} size={20} />
-                </div>
+                </div> */}
                 <a href="#cart" className={styles.cartIcon}>
                   <ShoppingCart size={24} />
                 </a>

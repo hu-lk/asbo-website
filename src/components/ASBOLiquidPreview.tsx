@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./styles/ASBOLiquidPreview.module.css";
 
-const liquidImagePath = "/assets/liquid_image.jpg";
+const liquidImagePath = "/assets/combine_liquid_image-removebg-preview.png";
 
 export default function ASBOLiquidPreview() {
   return (
@@ -14,8 +14,8 @@ export default function ASBOLiquidPreview() {
             <Image
               src={liquidImagePath}
               alt="ASBO Liquid"
-              width={300}
-              height={400}
+              width={400}
+              height={600}
               className={styles.image}
             />
           </div>
