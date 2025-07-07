@@ -141,7 +141,7 @@ export default function Navbar() {
                     </a>
                   </>
                 )}
-                <a href="/about" className={styles.navLink}>
+                <a href="/aboutUs" className={styles.navLink}>
                   About
                 </a>
                 <a href="#footer" className={styles.navLink}>
