@@ -11,11 +11,11 @@ html {
 body {
   min-height: 100vh;
   background-color: white;
-  padding: 0;
+  padding: 0.5rem; /* Default padding for mobile */
 }
 
 @media (min-width: 48rem) {
   body {
-    padding: 0;
+    padding: 1rem; /* Increased padding for tablet/desktop */
   }
 }

@@ -7,7 +7,7 @@
 .container {
   max-width: 80rem;
   margin: 0 auto;
-  padding: 4rem;
+  padding: 4rem 1rem; /* Reduced side padding for mobile */
 }
 
 .contentWrapper {
@@ -25,14 +25,13 @@
 
 .image {
   margin: 0 auto;
-  max-width: 18.75rem;
+  max-width: 18.75rem; /* 300px */
 }
 
 .textContent {
   width: 100%;
   max-width: 50%;
   padding-left: 0;
-  padding-left: 0.5rem;
 }
 
 .card {
@@ -138,6 +137,7 @@
   background-color: #4ac6b7;
 }
 
+/* Desktop Layout */
 @media (min-width: 48rem) {
   .contentWrapper {
     flex-direction: row;
@@ -149,5 +149,58 @@
 
   .textContent {
     padding-left: 0.5rem;
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 48rem) {
+  .container {
+    padding: 2rem 0.5rem; /* Reduced padding for mobile */
+  }
+
+  .contentWrapper {
+    gap: 1.5rem;
+  }
+
+  .imageContent {
+    max-width: 100%;
+  }
+
+  .image {
+    max-width: 100%; /* Full width on mobile */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .textContent {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .featuresTitle {
+    font-size: 1rem;
+  }
+
+  .emailInput {
+    flex: none;
+    width: 100%;
+    border-radius: 9999px;
+  }
+
+  .notifyButton {
+    width: 100%;
+    border-radius: 9999px;
+  }
+
+  .emailInputWrapper {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }

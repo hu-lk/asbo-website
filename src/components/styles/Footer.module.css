@@ -7,7 +7,7 @@
 .container {
   max-width: 80rem;
   margin: 0 auto;
-  padding: 4rem;
+  padding: 4rem 1rem; /* Reduced side padding for mobile */
 }
 
 .grid {
@@ -121,9 +121,14 @@
   color: #9ca3af;
 }
 
+/* Desktop Layout */
 @media (min-width: 48rem) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .container {
+    padding: 4rem;
   }
 
   .bottomSection {
@@ -133,5 +138,52 @@
 
   .copyright {
     margin-bottom: 0;
+  }
+
+  .logoText {
+    font-size: 1.75rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 48rem) {
+  .container {
+    padding: 2rem 0.5rem; /* Reduced padding for mobile */
+  }
+
+  .logoText {
+    font-size: 1.25rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+  }
+
+  .link {
+    font-size: 0.875rem;
+  }
+
+  .contactText {
+    font-size: 0.875rem;
+  }
+
+  .socialIcon {
+    font-size: 1.125rem;
+  }
+
+  .contactIcon {
+    font-size: 1.25rem;
+  }
+
+  .paymentIcon {
+    font-size: 1.25rem;
   }
 }
