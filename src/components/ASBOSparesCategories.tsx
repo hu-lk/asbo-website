@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./styles/ASBOSparesCategories.module.css";
+import Link from "next/link";
 
 const inlet_outlet_image = "/assets/inlet_outlet.jpg";
 const shock_absorbers_image = "/assets/shock_absorbers.jpg";
@@ -91,7 +92,9 @@ export default function ASBOSparesCategories() {
         </div>
 
         <div className={styles.viewAllButtonWrapper}>
-          <button className={styles.viewAllButton}>View All Categories</button>
+          <Link href="/spares" className={styles.viewAllButton}>
+            View All Categories
+          </Link>
         </div>
       </div>
     </section>
