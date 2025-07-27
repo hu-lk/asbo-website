@@ -1,139 +1,102 @@
-"use client";
-
 import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
   FaCcVisa,
   FaCcMastercard,
   FaCcPaypal,
   FaCcApplePay,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaEnvelope,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
 } from "react-icons/fa";
-import styles from "./styles/Footer.module.css";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer id="footer" className={styles.footer}>
-      <div className={styles.container}>
-        <div className={styles.grid}>
-          <div className={styles.column}>
-            <h3 className={styles.logoText}>ASBO</h3>
-            <p className={styles.description}>
-              Premium washing machine parts and liquid solutions for optimal
-              performance.
-            </p>
-            <div className={styles.socialLinks}>
-              <a href="/spares" className={styles.socialLink}>
-                <FaFacebookF className={styles.socialIcon} />
-              </a>
-              <a href="/spares" className={styles.socialLink}>
-                <FaTwitter className={styles.socialIcon} />
-              </a>
-              <a href="/spares" className={styles.socialLink}>
-                <FaInstagram className={styles.socialIcon} />
-              </a>
-              <a href="/spares" className={styles.socialLink}>
-                <FaLinkedinIn className={styles.socialIcon} />
-              </a>
-            </div>
-          </div>
-
-          <div className={styles.column}>
-            <h4 className={styles.sectionTitle}>Quick Links</h4>
-            <ul className={styles.linkList}>
-              <li>
-                <a href="/spares" className={styles.link}>
-                  ASBO Spares
-                </a>
-              </li>
-              <li>
-                <a href="#liquid" className={styles.link}>
-                  ASBO Liquid
-                </a>
-              </li>
-              <li>
-                <a href="/aboutUs" className={styles.link}>
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#footer" className={styles.link}>
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a href="#" className={styles.link}>
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className={styles.column}>
-            <h4 className={styles.sectionTitle}>Categories</h4>
-            <ul className={styles.linkList}>
-              <li>
-                <a href="/spares" className={styles.link}>
-                  Shock Absorbers
-                </a>
-              </li>
-              <li>
-                <a href="/spares" className={styles.link}>
-                  Inlet/Outlet Pipes
-                </a>
-              </li>
-              <li>
-                <a href="/spares" className={styles.link}>
-                  Stabilizers
-                </a>
-              </li>
-              <li>
-                <a href="/spares" className={styles.link}>
-                  Motors & Pumps
-                </a>
-              </li>
-              <li>
-                <a href="/spares" className={styles.link}>
-                  Control Panels
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className={styles.column}>
-            <h4 className={styles.sectionTitle}>Contact Us</h4>
-            <ul className={styles.contactList}>
-              <li className={styles.contactItem}>
-                <FaMapMarkerAlt className={styles.contactIcon} />
-                <span className={styles.contactText}>
-                  X road, adjacent lane Indra -Nagendra theatre, Saroornagar,
-                  Sai Nagar, Saroor Nagar East, Kharmanghat Hyderabad, Telangana
-                </span>
-              </li>
-              <li className={styles.contactItem}>
-                <FaPhoneAlt className={styles.contactIcon} />
-                <span className={styles.contactText}>+91 9676626307</span>
-              </li>
-              <li className={styles.contactItem}>
-                <FaEnvelope className={styles.contactIcon} />
-                <span className={styles.contactText}>info@asbo.com</span>
-              </li>
-            </ul>
+    <footer className="bg-blue-900 text-white pt-16 pb-6 px-4 sm:px-10 lg:px-32">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* Logo + Description */}
+        <div>
+          <h3 className="font-bold text-xl mb-2">ASBO</h3>
+          <p className="text-sm text-gray-300">
+            Premium washing machine parts and liquid solutions for optimal
+            performance.
+          </p>
+          <div className="flex gap-3 mt-4 text-xl">
+            <FaFacebookF />
+            <FaInstagram />
+            <FaTwitter />
+            <FaLinkedinIn />
           </div>
         </div>
 
-        <div className={styles.bottomSection}>
-          <p className={styles.copyright}>© 2025 ASBO. All rights reserved.</p>
-          <div className={styles.paymentIcons}>
-            <FaCcVisa className={styles.paymentIcon} />
-            <FaCcMastercard className={styles.paymentIcon} />
-            <FaCcPaypal className={styles.paymentIcon} />
-            <FaCcApplePay className={styles.paymentIcon} />
-          </div>
+        {/* Quick Links */}
+        <div>
+          <h4 className="font-semibold mb-3">Quick Links</h4>
+          <ul className="space-y-2 text-sm text-gray-300">
+            <li>
+              <Link href="/asbo-spares">ASBO Spares</Link>
+            </li>
+            <li>
+              <Link href="/asbo-liquid">ASBO Liquid</Link>
+            </li>
+            <li>
+              <Link href="/about">About Us</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link href="/blog">Blog</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Categories */}
+        <div>
+          <h4 className="font-semibold mb-3">Categories</h4>
+          <ul className="space-y-2 text-sm text-gray-300">
+            <li>Shock Absorbers</li>
+            <li>Inlet/Outlet Pipes</li>
+            <li>Stabilizers</li>
+            <li>Motors & Pumps</li>
+            <li>Control Panels</li>
+          </ul>
+        </div>
+
+        {/* Contact Info */}
+        <div>
+          <h4 className="font-semibold mb-3">Contact Us</h4>
+          <ul className="space-y-4 text-sm text-gray-300">
+            <li className="flex items-start gap-2">
+              <FaMapMarkerAlt className="mt-1" />
+              <span>
+                X road, adjacent lane Indra-Nagendra theatre, Saroornagar, Sai
+                Nagar, Saroor Nagar East, Kharmanghat Hyderabad, Telangana
+              </span>
+            </li>
+            <li className="flex items-center gap-2">
+              <FaPhoneAlt />
+              <span>+91 9676626307</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <FaEnvelope />
+              <span>info@asbo.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="mt-10 border-t border-blue-700 pt-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
+        <p>© 2025 ASBO. All rights reserved.</p>
+        <div className="flex gap-4 text-xl mt-4 md:mt-0">
+          <FaCcVisa />
+          <FaCcMastercard />
+          <FaCcPaypal />
+          <FaCcApplePay />
         </div>
       </div>
     </footer>
