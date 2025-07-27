@@ -1,169 +1,69 @@
 "use client";
 
-import styles from "./styles/Navbar.module.css";
-import { ShoppingCart, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart, Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const isSparesPage = pathname === "/spares";
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
   return (
-    <header className={styles.header}>
-      <div className={styles.container}>
-        <div className={styles.navWrapper}>
-          {/* Logo */}
-          <div className={styles.logo}>
-            <Link href="/" className={styles.logoText}>
-              ASBO
-            </Link>
-          </div>
+    <header className="bg-white shadow-sm px-4 sm:px-6 lg:px-10 py-4 sticky top-0 z-50">
+      <div className="flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold text-blue-900">
+          ASBO
+        </Link>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className={styles.mobileMenuToggle}
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
+          <Link href="/asbo-services">ASBO Services</Link>
+          <Link href="/asbo-spares">ASBO Spares</Link>
+          <span
+            className="flex items-center gap-1 text-gray-400 cursor-not-allowed"
+            title="Coming Soon"
           >
-            <Menu size={24} />
-          </button>
+            ASBO Liquid
+            <span className="ml-2 text-xs text-white bg-emerald-500 px-2 py-0.5 rounded-full">
+              Coming Soon
+            </span>
+          </span>
+          <Link href="/about">About</Link>
+          <Link href="/billing">Billing</Link>
+        </nav>
 
-          {/* Desktop Navigation */}
-          <nav className={styles.nav}>
-            <div className={styles.dropdown}>
-              <a href="#services" className={styles.navLink}>
-                ASBO Services
-              </a>
-              <div className={styles.dropdownContent}>
-                <a
-                  href="#washing-machine-service"
-                  className={styles.dropdownItem}
+        {/* Search & Cart */}
+        <div className="hidden md:flex items-center gap-3">
+          <Button variant="ghost" size="icon">
+            <ShoppingCart className="w-5 h-5" />
+          </Button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64">
+              <div className="flex flex-col gap-4 mt-6 text-gray-800 font-medium">
+                <Link href="/asbo-services">ASBO Services</Link>
+                <Link href="/asbo-spares">ASBO Spares</Link>
+                <span
+                  className="text-gray-400 cursor-not-allowed flex items-center"
+                  title="Coming Soon"
                 >
-                  Washing Machine Service
-                </a>
-                <a href="#dishwasher-service" className={styles.dropdownItem}>
-                  Dishwasher Service
-                </a>
-                <a
-                  href="#microwave-oven-service"
-                  className={styles.dropdownItem}
-                >
-                  Microwave Oven Service
-                </a>
-              </div>
-            </div>
-            {!isSparesPage && (
-              <>
-                <a href="/spares" className={styles.navLink}>
-                  ASBO Spares
-                </a>
-                <a href="#liquid" className={styles.navLink}>
                   ASBO Liquid
-                  <span className={styles.comingSoonBadge}>Coming Soon</span>
-                </a>
-              </>
-            )}
-            <a href="/aboutUs" className={styles.navLink}>
-              About
-            </a>
-            <a href="#footer" className={styles.navLink}>
-              Contact
-            </a>
-          </nav>
-
-          {/* Desktop Right Section */}
-          <div className={styles.rightSection}>
-            {/* <div className={styles.searchContainer}>
-              <input
-                type="text"
-                placeholder="Search products..."
-                className={styles.searchInput}
-                id="searchInput"
-              />
-              <Search className={styles.searchIcon} size={20} />
-            </div> */}
-            <a href="#cart" className={styles.cartIcon}>
-              <ShoppingCart size={24} />
-            </a>
-          </div>
-
-          {/* Mobile Modal */}
-          {isMobileMenuOpen && (
-            <div className={`${styles.mobileModal} ${styles.active}`}>
-              <button
-                className={styles.closeButton}
-                onClick={toggleMobileMenu}
-                aria-label="Close menu"
-              >
-                <X size={24} />
-              </button>
-              <nav className={styles.navMobile}>
-                <div className={styles.dropdown}>
-                  <a href="#services" className={styles.navLink}>
-                    ASBO Services
-                  </a>
-                  <div className={styles.dropdownContent}>
-                    <a
-                      href="#washing-machine-service"
-                      className={styles.dropdownItem}
-                    >
-                      Washing Machine Service
-                    </a>
-                    <a
-                      href="#dishwasher-service"
-                      className={styles.dropdownItem}
-                    >
-                      Dishwasher Service
-                    </a>
-                    <a
-                      href="#microwave-oven-service"
-                      className={styles.dropdownItem}
-                    >
-                      Microwave Oven Service
-                    </a>
-                  </div>
-                </div>
-                {!isSparesPage && (
-                  <>
-                    <a href="/spares" className={styles.navLink}>
-                      ASBO Spares
-                    </a>
-                    <a href="#liquid" className={styles.navLink}>
-                      ASBO Liquid
-                      <span className={styles.comingSoonBadge}>
-                        Coming Soon
-                      </span>
-                    </a>
-                  </>
-                )}
-                <a href="/aboutUs" className={styles.navLink}>
-                  About
-                </a>
-                <a href="#footer" className={styles.navLink}>
-                  Contact
-                </a>
-              </nav>
-              <div className={styles.rightSectionMobile}>
-                {/* <div className={styles.searchContainer}>
-                  <input
-                    type="text"
-                    placeholder="Search products..."
-                    className={styles.searchInput}
-                    id="searchInput"
-                  />
-                  <Search className={styles.searchIcon} size={20} />
-                </div> */}
-                <a href="#cart" className={styles.cartIcon}>
-                  <ShoppingCart size={24} />
-                </a>
+                  <span className="ml-2 text-xs text-white bg-emerald-500 px-2 py-0.5 rounded-full">
+                    Coming Soon
+                  </span>
+                </span>
+                <Link href="/about">About</Link>
+                <Link href="/billing">Billing</Link>
               </div>
-            </div>
-          )}
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
