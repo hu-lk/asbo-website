@@ -10,8 +10,11 @@ export default function AgentLogin({ onLogin }: { onLogin: () => void }) {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Replace this with real auth later
-    if (username === "agent" && password === "password123") {
+
+    const validUsername = process.env.NEXT_PUBLIC_AGENT_USERNAME;
+    const validPassword = process.env.NEXT_PUBLIC_AGENT_PASSWORD;
+
+    if (username === validUsername && password === validPassword) {
       onLogin();
     } else {
       alert("Invalid credentials");
