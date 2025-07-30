@@ -24,7 +24,7 @@ export default function AgentLogin({ onLogin }: { onLogin: () => void }) {
   return (
     <form
       onSubmit={handleLogin}
-      className="max-w-md w-full bg-white p-8 rounded-lg shadow-md mx-auto mt-20 space-y-4"
+      className="max-w-md w-full bg-white p-8 rounded-lg shadow-md mx-auto  space-y-4"
     >
       <h2 className="text-2xl font-bold text-blue-900 text-center">
         Agent Login
