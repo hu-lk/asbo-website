@@ -8,7 +8,7 @@ export default function BillingPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       {isAuthenticated ? (
         <BillingForm />
       ) : (
