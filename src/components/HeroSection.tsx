@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { WashingMachine, Utensils, Microwave, Snowflake } from "lucide-react";
+import {
+  WashingMachine,
+  Utensils,
+  Microwave,
+  Snowflake,
+  GlassWater,
+} from "lucide-react";
 import { AirVent } from "lucide-react"; // use for AC
 import ServiceCard from "./ServiceCard";
 
@@ -46,6 +52,11 @@ export default function HeroSection() {
             icon={<AirVent className="w-5 h-5" />}
             title="AC"
             subtitle="Efficient cooling"
+          />
+          <ServiceCard
+            icon={<GlassWater className="w-5 h-5" />}
+            title="Water Purifier"
+            subtitle="Healthy drinking"
           />
         </div>
 

@@ -1,0 +1,18 @@
+export const spareTypes = [
+  "Door lock",
+  "Single Inlet valve",
+  "Double Inlet valve",
+  "3 way Inlet valve",
+  "Sensor",
+  "Drain motor",
+  "Single drain pump",
+  "Double drain pump",
+  "Inlet pipe 1.5m",
+  "Inlet pipe 2.3m",
+  "Outlet pipe",
+  "Door handle",
+  "Dampers",
+  "Suspension rods",
+  "Gear box",
+  "Triangle lg,samsung,ifb",
+];

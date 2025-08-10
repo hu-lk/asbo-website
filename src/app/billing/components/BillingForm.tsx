@@ -1,33 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { generateBillPDF, BillItem } from "@/lib/pdfGenerator";
 import SignaturePad from "react-signature-canvas";
-import { useRef } from "react";
+import Select from "react-select";
+import { spareTypes } from "@/lib/sparesTypes";
+import { allServices } from "@/lib/allServices";
 
-// At the top inside the component
+const serviceTypes = ["Installation", "Repair", "Maintenance", "Inspection"];
 
-const spareTypes = [
-  "Door lock",
-  "Single Inlet valve",
-  "Double Inlet valve",
-  "3 way Inlet valve",
-  "Sensor",
-  "Drain motor",
-  "Single drain pump",
-  "Double drain pump",
-  "Inlet pipe 1.5m",
-  "Inlet pipe 2.3m",
-  "Outlet pipe",
-  "Door handle",
-  "Dampers",
-  "Suspension rods",
-  "Gear box",
-  "Triangle lg,samsung,ifb",
-];
+type ItemOption = {
+  label: string;
+  value: string;
+  type: "service" | "spare";
+};
 
 export default function BillingForm() {
   const [items, setItems] = useState<BillItem[]>([]);
@@ -37,10 +26,13 @@ export default function BillingForm() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [gstin, setGstin] = useState("");
+  const [serviceType, setServiceType] = useState(serviceTypes[0]);
   const customerSigRef = useRef<SignaturePad>(null);
   const agentSigRef = useRef<SignaturePad>(null);
+  const [invoiceCount, setInvoiceCount] = useState(1);
+
   const addItem = () => {
-    setItems([...items, { name: "", price: 0, quantity: 1 }]);
+    setItems([...items, { name: "", price: 0, quantity: 1, type: "service" }]);
   };
 
   const updateItem = (
@@ -56,6 +48,10 @@ export default function BillingForm() {
         item[key] = Number(value) as BillItem[typeof key];
       } else if (key === "name") {
         item[key] = value as BillItem[typeof key];
+      } else if (key === "type") {
+        if (value === "service" || value === "spare") {
+          item[key] = value;
+        }
       }
 
       updated[index] = item;
@@ -85,18 +81,53 @@ export default function BillingForm() {
     });
   };
 
+  const serviceItems: ItemOption[] = Object.entries(allServices).flatMap(
+    ([_, services]) =>
+      services.map((service) => ({
+        label: service,
+        value: service,
+        type: "service",
+      }))
+  );
+
+  const spareItems: ItemOption[] = spareTypes.map((spare) => ({
+    label: spare,
+    value: spare,
+    type: "spare",
+  }));
+
+  const groupedItemOptions = [
+    {
+      label: "Services",
+      options: serviceItems,
+    },
+    {
+      label: "Spares",
+      options: spareItems,
+    },
+  ];
+
+  const spareItemsOnly = items.filter((item) => spareTypes.includes(item.name));
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-
-  const discountAmount = (subtotal * discountPercent) / 100;
+  const discountAmount = spareItemsOnly.reduce(
+    (sum, item) => sum + (item.price * item.quantity * discountPercent) / 100,
+    0
+  );
   const taxBase = subtotal - discountAmount;
 
-  const cgstAmount = includeGST ? (taxBase * 9) / 100 : 0;
-  const sgstAmount = includeGST ? (taxBase * 9) / 100 : 0;
+  const cgstTotal = includeGST
+    ? spareItemsOnly.reduce((sum, item) => {
+        const itemTotal = item.price * item.quantity;
+        const discount = (itemTotal * discountPercent) / 100;
+        return sum + ((itemTotal - discount) * 9) / 100;
+      }, 0)
+    : 0;
 
-  const total = taxBase + cgstAmount + sgstAmount;
+  const sgstTotal = cgstTotal;
+  const total = taxBase + cgstTotal + sgstTotal;
 
   const handleGeneratePDF = () => {
     const customerSignature = customerSigRef.current?.isEmpty()
@@ -107,7 +138,6 @@ export default function BillingForm() {
       ? null
       : agentSigRef.current?.toDataURL();
 
-    // Validation
     if (
       !customerName.trim() ||
       !phone.trim() ||
@@ -121,8 +151,7 @@ export default function BillingForm() {
       );
       return;
     }
-
-    // Success alert (optional)
+    setInvoiceCount(invoiceCount + 1);
     alert("Bill generated successfully!");
 
     generateBillPDF({
@@ -135,6 +164,8 @@ export default function BillingForm() {
       gstin,
       customerSignature,
       agentSignature,
+      serviceType,
+      invoiceCount,
     });
   };
 
@@ -165,6 +196,17 @@ export default function BillingForm() {
           value={gstin}
           onChange={(e) => setGstin(e.target.value)}
         />
+        <select
+          className="border rounded p-2 w-full"
+          value={serviceType}
+          onChange={(e) => setServiceType(e.target.value)}
+        >
+          {serviceTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* GST Checkbox */}
@@ -179,7 +221,7 @@ export default function BillingForm() {
         </label>
       </div>
 
-      {/* Items */}
+      {/* Items Table */}
       <h2 className="font-semibold mb-2">Items</h2>
       <div className="overflow-x-auto w-full">
         <table className="w-full text-sm text-left border rounded-md overflow-hidden">
@@ -188,74 +230,127 @@ export default function BillingForm() {
               <th className="px-3 py-2">Item Name</th>
               <th className="px-3 py-2">Price</th>
               <th className="px-3 py-2">Quantity</th>
-              <th className="px-3 py-2">Total</th>
+              <th className="px-3 py-2">Item Total</th>
+              <th className="px-3 py-2">CGST (9%)</th>
+              <th className="px-3 py-2">SGST (9%)</th>
               <th className="px-3 py-2">Action</th>
             </tr>
           </thead>
           <tbody>
-            {items.map((item, idx) => (
-              <tr key={idx} className="border-t">
-                <td className="px-3 py-2 w-full/2 min-w-[160px]">
-                  <select
-                    className="border rounded p-1 w-full"
-                    value={item.name}
-                    onChange={(e) => updateItem(idx, "name", e.target.value)}
-                  >
-                    <option value="">Select item</option>
-                    {spareTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </td>
+            {items.map((item, idx) => {
+              const isSpare = spareTypes.includes(item.name);
+              const itemTotal = item.price * item.quantity;
+              const itemDiscount = isSpare
+                ? (itemTotal * discountPercent) / 100
+                : 0;
+              const taxableAmount = itemTotal - itemDiscount;
+              const itemCGST =
+                includeGST && isSpare ? (taxableAmount * 9) / 100 : 0;
+              const itemSGST = itemCGST;
 
-                <td className="px-3 py-2">
-                  <div className="flex items-center gap-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => decrementPrice(idx)}
-                    >
-                      -
-                    </Button>
-                    <Input
-                      type="text"
-                      value={item.price.toString()}
-                      onChange={(e) => updateItem(idx, "price", e.target.value)}
-                      className="w-20 text-center"
+              return (
+                <tr key={idx} className="border-t">
+                  <td className="px-3 py-2 min-w-[200px]">
+                    <Select
+                      className="w-full"
+                      menuPortalTarget={
+                        typeof window !== "undefined" ? document.body : null
+                      }
+                      styles={{
+                        control: (base) => ({
+                          ...base,
+                          backgroundColor: "white",
+                          borderColor: "#d1d5db",
+                          minHeight: "2.5rem",
+                          boxShadow: "none",
+                        }),
+                        menu: (base) => ({
+                          ...base,
+                          zIndex: 9999,
+                          backgroundColor: "white",
+                          color: "black",
+                        }),
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                        option: (base, state) => ({
+                          ...base,
+                          backgroundColor: state.isFocused
+                            ? "#e0f2fe"
+                            : "white",
+                          color: "black",
+                        }),
+                        input: (base) => ({ ...base, color: "black" }),
+                        singleValue: (base) => ({ ...base, color: "black" }),
+                      }}
+                      value={groupedItemOptions
+                        .flatMap((group) => group.options)
+                        .find((opt) => opt.value === item.name)}
+                      onChange={(selected) => {
+                        if (!selected) return;
+                        updateItem(idx, "name", selected.value);
+                        updateItem(idx, "type", selected.type);
+                      }}
+                      options={groupedItemOptions}
+                      isSearchable
+                      placeholder="Select item"
+                      formatGroupLabel={(group) => (
+                        <div className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                          {group.label === "Services" ? "🛠️" : "🧩"}{" "}
+                          {group.label}
+                        </div>
+                      )}
                     />
+                  </td>
+                  <td className="px-3 py-2">
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => decrementPrice(idx)}
+                      >
+                        -
+                      </Button>
+                      <Input
+                        type="text"
+                        value={item.price.toString()}
+                        onChange={(e) =>
+                          updateItem(idx, "price", e.target.value)
+                        }
+                        className="w-20 text-center"
+                      />
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => incrementPrice(idx)}
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </td>
+                  <td className="px-3 py-2">
+                    <Input
+                      type="number"
+                      min="1"
+                      value={item.quantity}
+                      onChange={(e) =>
+                        updateItem(idx, "quantity", e.target.value)
+                      }
+                    />
+                  </td>
+                  <td className="px-3 py-2">₹{itemTotal}</td>
+                  <td className="px-3 py-2">₹{itemCGST.toFixed(2)}</td>
+                  <td className="px-3 py-2">₹{itemSGST.toFixed(2)}</td>
+                  <td className="px-3 py-2">
                     <Button
                       size="sm"
-                      variant="outline"
-                      onClick={() => incrementPrice(idx)}
+                      variant="destructive"
+                      onClick={() => removeItem(idx)}
                     >
-                      +
+                      Remove
                     </Button>
-                  </div>
-                </td>
-                <td className="px-3 py-2">
-                  <Input
-                    type="number"
-                    min="1"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      updateItem(idx, "quantity", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="px-3 py-2">₹{item.price * item.quantity}</td>
-                <td className="px-3 py-2">
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => removeItem(idx)}
-                  >
-                    Remove
-                  </Button>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -265,7 +360,7 @@ export default function BillingForm() {
         </Button>
       </div>
 
-      {/* Discount */}
+      {/* Discount Input */}
       <div className="flex justify-end items-center gap-4 mt-6">
         <label className="text-gray-700">Discount (%):</label>
         <Input
@@ -285,18 +380,22 @@ export default function BillingForm() {
         />
       </div>
 
-      {/* Summary */}
+      {/* Totals */}
       <div className="text-right mt-4">
-        <p className="text-sm text-gray-600">Subtotal: ₹{subtotal}</p>
-        <p className="text-sm text-gray-600">CGST: ₹{cgstAmount.toFixed(2)}</p>
-        <p className="text-sm text-gray-600">SGST: ₹{sgstAmount.toFixed(2)}</p>
+        <p className="text-sm text-gray-600">
+          Subtotal: ₹{subtotal.toFixed(2)}
+        </p>
         <p className="text-sm text-gray-600">
           Discount: ₹{discountAmount.toFixed(2)}
         </p>
+        <p className="text-sm text-gray-600">CGST: ₹{cgstTotal.toFixed(2)}</p>
+        <p className="text-sm text-gray-600">SGST: ₹{sgstTotal.toFixed(2)}</p>
         <p className="text-lg font-bold text-blue-900">
           Total: ₹{total.toFixed(2)}
         </p>
       </div>
+
+      {/* Signatures */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <p className="font-semibold mb-2">Customer Signature</p>
@@ -314,7 +413,6 @@ export default function BillingForm() {
             Clear
           </Button>
         </div>
-
         <div>
           <p className="font-semibold mb-2">Agent Signature</p>
           <SignaturePad
@@ -333,6 +431,7 @@ export default function BillingForm() {
         </div>
       </div>
 
+      {/* Final Generate Button */}
       <div className="flex justify-end mt-6">
         <Button className="bg-blue-900 text-white" onClick={handleGeneratePDF}>
           Generate Bill (PDF)
